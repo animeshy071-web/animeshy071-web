@@ -112,7 +112,7 @@
 </div>
 
 <div align="center">
-  <img src="./assets/swinging-spider.svg" alt="Swinging Scarlet Spider" width="850" style="max-width: 100%; height: auto;" />
+  <img src="./assets/swinging-spider.gif" alt="Swinging Scarlet Spider-Man" width="850" style="max-width: 100%; height: auto;" />
 </div>
 
 <div align="center">
