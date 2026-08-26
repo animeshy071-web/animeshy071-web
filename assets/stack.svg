@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 135" width="100%" height="100%">
+  <defs>
+    <linearGradient id="stackGradP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090d" />
+      <stop offset="100%" stop-color="#060608" />
+    </linearGradient>
+
+    <pattern id="stackDotsP" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.65" fill="#ffffff" fill-opacity="0.02" />
+    </pattern>
+
+    <pattern id="stackHatch" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="6" y2="6" stroke="#1c1c28" stroke-width="0.6" opacity="0.4" />
+    </pattern>
+  </defs>
+
+  <rect width="850" height="135" fill="#050505" />
+  
+  <!-- Comic Shadow Underlayer -->
+  <rect x="7" y="7" width="836" height="121" fill="#10182A" opacity="0.7" />
+
+  <!-- Main Comic Equipment Panel -->
+  <rect x="5" y="5" width="840" height="125" fill="url(#stackGradP)" stroke="#22222e" stroke-width="1.5" />
+  <rect x="5" y="5" width="840" height="125" fill="url(#stackDotsP)" />
+  <rect x="700" y="5" width="145" height="125" fill="url(#stackHatch)" />
+
+  <!-- Corner Brackets & Crimson Ink Ticks -->
+  <path d="M 5 22 L 5 5 L 22 5" fill="none" stroke="#E50914" stroke-width="2" />
+  <circle cx="16" cy="16" r="1.5" fill="#E50914" />
+  <path d="M 845 112 L 845 130 L 828 130" fill="none" stroke="#E50914" stroke-width="2" />
+
+  <!-- Web Accent in background -->
+  <g stroke="#353545" stroke-width="0.7" fill="none" opacity="0.35">
+    <path d="M 845 5 L 760 5" />
+    <path d="M 845 5 L 780 45" />
+    <path d="M 795 5 Q 815 22 845 25" stroke="#E50914" stroke-opacity="0.35" />
+  </g>
+
+  <!-- Row 1: LANGUAGES & FRAMEWORKS -->
+  <g transform="translate(28, 26)">
+    <text x="0" y="17" font-family="'Consolas', 'Fira Code', monospace" font-size="10" fill="#68687a" letter-spacing="1.5">
+      LANGUAGES &amp; FRAMEWORKS //
+    </text>
+
+    <!-- Python -->
+    <g transform="translate(195, 0)">
+      <rect x="0" y="0" width="76" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#FF3030" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">Python</text>
+    </g>
+
+    <!-- TypeScript -->
+    <g transform="translate(280, 0)">
+      <rect x="0" y="0" width="102" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#FF3030" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">TypeScript</text>
+    </g>
+
+    <!-- React -->
+    <g transform="translate(391, 0)">
+      <rect x="0" y="0" width="70" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#FF3030" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">React</text>
+    </g>
+
+    <!-- C++ -->
+    <g transform="translate(470, 0)">
+      <rect x="0" y="0" width="56" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#FF3030" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">C++</text>
+    </g>
+
+    <!-- Solidity -->
+    <g transform="translate(535, 0)">
+      <rect x="0" y="0" width="82" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#FF3030" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">Solidity</text>
+    </g>
+
+    <!-- Node.js -->
+    <g transform="translate(626, 0)">
+      <rect x="0" y="0" width="80" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#FF3030" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">Node.js</text>
+    </g>
+  </g>
+
+  <!-- Inked Divider Line -->
+  <line x1="28" y1="72" x2="822" y2="72" stroke="#1a1a26" stroke-width="1" />
+
+  <!-- Row 2: AI & INFRASTRUCTURE -->
+  <g transform="translate(28, 85)">
+    <text x="0" y="17" font-family="'Consolas', 'Fira Code', monospace" font-size="10" fill="#68687a" letter-spacing="1.5">
+      AI &amp; INFRASTRUCTURE //
+    </text>
+
+    <!-- AI / ML -->
+    <g transform="translate(195, 0)">
+      <rect x="0" y="0" width="76" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#E50914" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">AI / ML</text>
+    </g>
+
+    <!-- Multi-Agent Systems -->
+    <g transform="translate(280, 0)">
+      <rect x="0" y="0" width="136" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#E50914" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">Multi-Agent Sys</text>
+    </g>
+
+    <!-- Firebase -->
+    <g transform="translate(425, 0)">
+      <rect x="0" y="0" width="85" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#E50914" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">Firebase</text>
+    </g>
+
+    <!-- Git -->
+    <g transform="translate(520, 0)">
+      <rect x="0" y="0" width="56" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#E50914" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">Git</text>
+    </g>
+
+    <!-- Systems / LLMs -->
+    <g transform="translate(585, 0)">
+      <rect x="0" y="0" width="121" height="25" fill="#111116" stroke="#262634" stroke-width="1" />
+      <circle cx="9" cy="12.5" r="2.2" fill="#E50914" />
+      <text x="19" y="16.5" font-family="'Consolas', 'Fira Code', monospace" font-size="11.5" fill="#E0E0EA">LLM Pipelines</text>
+    </g>
+  </g>
+</svg>

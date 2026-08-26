@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 145" width="100%" height="145">
+  <defs>
+    <linearGradient id="cardGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0f" />
+      <stop offset="100%" stop-color="#070709" />
+    </linearGradient>
+
+    <pattern id="cardDotsP5" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.65" fill="#ffffff" fill-opacity="0.025" />
+    </pattern>
+
+    <pattern id="cardHatch5" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="6" y2="6" stroke="#1c1c28" stroke-width="0.7" opacity="0.45" />
+    </pattern>
+  </defs>
+
+  <rect x="7" y="7" width="398" height="133" fill="#10182A" opacity="0.7" />
+
+  <rect x="5" y="5" width="400" height="135" fill="url(#cardGrad5)" stroke="#22222e" stroke-width="1.5" />
+  <rect x="5" y="5" width="400" height="135" fill="url(#cardDotsP5)" />
+  <rect x="290" y="75" width="115" height="65" fill="url(#cardHatch5)" />
+
+  <path d="M 5 24 L 5 5 L 24 5" fill="none" stroke="#E50914" stroke-width="2" />
+  <circle cx="16" cy="16" r="1.5" fill="#E50914" />
+  <path d="M 405 120 L 405 140 L 385 140" fill="none" stroke="#E50914" stroke-width="2" />
+
+  <!-- Hand-Drawn Web Strands (Mid-Left Web Anchor) -->
+  <g stroke="#3a3a4c" stroke-width="0.8" fill="none" opacity="0.45">
+    <path d="M 5 70 L 48 42" />
+    <path d="M 5 70 L 52 90" />
+    <path d="M 32 50 Q 25 68 5 78" stroke="#E50914" stroke-opacity="0.5" />
+    <circle cx="45" cy="42" r="2" fill="#FF3030" />
+  </g>
+
+  <text x="388" y="24" font-family="'Consolas', 'Fira Code', monospace" font-size="9" fill="#58586c" letter-spacing="1" text-anchor="end">
+    [ REPO // 05 ]
+  </text>
+
+  <text x="24" y="44"
+        font-family="-apple-system, BlinkMacSystemFont, 'Impact', 'Montserrat', 'Segoe UI', sans-serif"
+        font-weight="900"
+        font-size="19"
+        letter-spacing="2"
+        fill="#F2F2F2">
+    KOMVOS
+  </text>
+
+  <text x="24" y="75"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="12"
+        fill="#9292A4">
+    Visual desktop platform for multi-model AI inference pipelines.
+  </text>
+
+  <line x1="24" y1="95" x2="385" y2="95" stroke="#1c1c28" stroke-width="1" />
+
+  <g font-family="'Consolas', 'Fira Code', monospace" font-size="11" letter-spacing="0.5">
+    <text x="24" y="118" fill="#A8A8BA">
+      <tspan fill="#D0D0E0">TypeScript</tspan>
+      <tspan fill="#E50914" font-weight="bold"> · </tspan>
+      <tspan fill="#D0D0E0">React</tspan>
+      <tspan fill="#E50914" font-weight="bold"> · </tspan>
+      <tspan fill="#D0D0E0">Electron</tspan>
+      <tspan fill="#E50914" font-weight="bold"> · </tspan>
+      <tspan fill="#88889a">AI Pipelines</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(378, 112)" stroke="#E50914" stroke-width="1.4" fill="none">
+    <path d="M 0 5 L 8 5 L 4 1" />
+    <path d="M 8 5 L 4 9" />
+  </g>
+</svg>

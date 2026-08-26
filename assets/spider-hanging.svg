@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90" width="160" height="90">
+  <defs>
+    <filter id="spiderDrop" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.8" />
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes threadSway {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(3.5deg);
+      }
+      75% {
+        transform: rotate(-3.5deg);
+      }
+    }
+
+    @keyframes hangLegs {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .sway-group {
+      transform-origin: 80px 0px;
+      animation: threadSway 6s infinite ease-in-out;
+    }
+
+    .legs-group {
+      animation: hangLegs 3s infinite ease-in-out;
+      transform-origin: 80px 65px;
+    }
+  </style>
+
+  <g class="sway-group">
+    <!-- Silk Thread -->
+    <line x1="80" y1="0" x2="80" y2="58" stroke="#505060" stroke-width="0.8" opacity="0.65" />
+    <line x1="80" y1="20" x2="80" y2="58" stroke="#E50914" stroke-width="0.5" opacity="0.4" />
+
+    <!-- Spider Body & Legs -->
+    <g class="legs-group" filter="url(#spiderDrop)">
+      <!-- 8 Jointed Legs -->
+      <!-- Left Legs -->
+      <g stroke="#262635" stroke-width="0.9" fill="none" stroke-linecap="round">
+        <path d="M 77 62 L 70 57 L 66 61" />
+        <path d="M 76 64 L 68 62 L 64 67" />
+        <path d="M 76 66 L 68 69 L 66 76" />
+        <path d="M 77 68 L 71 73 L 69 82" />
+      </g>
+      <!-- Right Legs -->
+      <g stroke="#262635" stroke-width="0.9" fill="none" stroke-linecap="round">
+        <path d="M 83 62 L 90 57 L 94 61" />
+        <path d="M 84 64 L 92 62 L 96 67" />
+        <path d="M 84 66 L 92 69 L 94 76" />
+        <path d="M 83 68 L 89 73 L 91 82" />
+      </g>
+
+      <!-- Spider Body (Hanging Head-Down) -->
+      <!-- Cephalothorax (Top part when hanging, or head at bottom) -->
+      <ellipse cx="80" cy="62" rx="3.2" ry="4" fill="#121218" stroke="#2a2a38" stroke-width="0.7" />
+      <!-- Abdomen (Larger lower part) -->
+      <ellipse cx="80" cy="70" rx="4" ry="5.5" fill="#0d0d12" stroke="#22222e" stroke-width="0.8" />
+      
+      <!-- Hourglass / Crimson Dorsal Mark -->
+      <path d="M 78.5 68 L 81.5 68 L 79 70.5 L 81.5 73 L 78.5 73 L 81 70.5 Z" fill="#E50914" opacity="0.9" />
+
+      <!-- Eyes (tiny red glints) -->
+      <circle cx="79" cy="59.5" r="0.5" fill="#FF3030" />
+      <circle cx="81" cy="59.5" r="0.5" fill="#FF3030" />
+    </g>
+  </g>
+</svg>

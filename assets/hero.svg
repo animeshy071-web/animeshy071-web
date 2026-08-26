@@ -1,0 +1,382 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 320" width="100%" height="100%">
+  <defs>
+    <!-- Dark Graphic Novel Gradients -->
+    <linearGradient id="comicSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050507" />
+      <stop offset="50%" stop-color="#08080d" />
+      <stop offset="85%" stop-color="#0e0c14" />
+      <stop offset="100%" stop-color="#050505" />
+    </linearGradient>
+
+    <!-- Deep Crimson Ambient Lighting -->
+    <radialGradient id="comicRedAtmosphere" cx="48%" cy="52%" r="50%">
+      <stop offset="0%" stop-color="#E50914" stop-opacity="0.16" />
+      <stop offset="45%" stop-color="#E50914" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#050505" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Midnight Blue Shadow Gradient -->
+    <radialGradient id="midnightShadow" cx="15%" cy="85%" r="45%">
+      <stop offset="0%" stop-color="#10182A" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#050505" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Authentic Graphic Novel Ben-Day Halftone Dot Pattern -->
+    <pattern id="benDayDots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#ffffff" fill-opacity="0.03" />
+      <circle cx="7" cy="7" r="1.1" fill="#E50914" fill-opacity="0.045" />
+    </pattern>
+
+    <!-- Comic Crosshatch Texture Pattern -->
+    <pattern id="crosshatch" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="8" y2="8" stroke="#181824" stroke-width="0.7" opacity="0.4" />
+    </pattern>
+
+    <!-- Glow Filter for Web Nodes & Spider Eyes -->
+    <filter id="inkGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="comicShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="3" dy="5" stdDeviation="3" flood-color="#000000" flood-opacity="0.95" />
+    </filter>
+  </defs>
+
+  <style>
+    /* 60fps Smooth Organic Crawling Animation */
+    @keyframes crawlWebPath {
+      0% {
+        transform: translate(50px, 45px) rotate(18deg);
+      }
+      22% {
+        transform: translate(210px, 92px) rotate(14deg);
+      }
+      50% {
+        transform: translate(425px, 118px) rotate(3deg);
+      }
+      78% {
+        transform: translate(640px, 95px) rotate(-14deg);
+      }
+      100% {
+        transform: translate(795px, 58px) rotate(-24deg);
+      }
+    }
+
+    @keyframes spiderLegsGaitL {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(16deg); }
+    }
+
+    @keyframes spiderLegsGaitR {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-16deg); }
+    }
+
+    @keyframes pulseCrimsonNode {
+      0%, 100% { r: 3px; opacity: 0.7; }
+      50% { r: 5px; opacity: 1; }
+    }
+
+    @keyframes ambientDrift {
+      0% { transform: translate(0, 0); opacity: 0; }
+      30% { opacity: 0.7; }
+      70% { opacity: 0.4; }
+      100% { transform: translate(35px, -50px); opacity: 0; }
+    }
+
+    .spider-walker {
+      animation: crawlWebPath 22s infinite alternate ease-in-out;
+      transform-origin: center;
+    }
+
+    .legs-left-group {
+      animation: spiderLegsGaitL 0.55s infinite ease-in-out;
+      transform-origin: 10px 10px;
+    }
+
+    .legs-right-group {
+      animation: spiderLegsGaitR 0.55s infinite ease-in-out;
+      transform-origin: 10px 10px;
+    }
+
+    .crimson-node {
+      animation: pulseCrimsonNode 3s infinite ease-in-out;
+    }
+
+    .ink-ember-1 { animation: ambientDrift 8s infinite linear; }
+    .ink-ember-2 { animation: ambientDrift 10s infinite 2.5s linear; }
+    .ink-ember-3 { animation: ambientDrift 7s infinite 1.2s linear; }
+  </style>
+
+  <!-- ======================================================== -->
+  <!-- BACKDROP : DARK NOIR CITY & ATMOSPHERE                   -->
+  <!-- ======================================================== -->
+  <rect width="850" height="320" fill="url(#comicSky)" />
+  <rect width="850" height="320" fill="url(#midnightShadow)" />
+  <rect width="850" height="320" fill="url(#comicRedAtmosphere)" />
+  <rect width="850" height="320" fill="url(#benDayDots)" />
+
+  <!-- Noir City Skyline Silhouettes (Dark Comic Ink Style) -->
+  <g fill="#0b0b10" stroke="#161622" stroke-width="1.2">
+    <!-- Far Background Buildings -->
+    <rect x="25" y="210" width="80" height="95" fill="#08080c" />
+    <rect x="95" y="180" width="65" height="125" fill="#09090e" />
+    <rect x="155" y="225" width="75" height="80" fill="#08080c" />
+    
+    <!-- Cathedral / Spire Silhouette -->
+    <path d="M 230 305 L 230 195 L 255 155 L 280 195 L 280 305 Z" fill="#0c0c12" />
+    <line x1="255" y1="155" x2="255" y2="135" stroke="#252535" stroke-width="1.5" />
+    
+    <!-- Mid Buildings with Crosshatches -->
+    <rect x="290" y="220" width="90" height="85" fill="#0a0a0f" />
+    <rect x="375" y="195" width="115" height="110" fill="#0c0c12" />
+    <rect x="480" y="215" width="75" height="90" fill="#09090e" />
+    <rect x="545" y="200" width="95" height="105" fill="#0b0b10" />
+    
+    <!-- Water Tower Building (Classic Comic Noir Trope) -->
+    <rect x="630" y="175" width="85" height="130" fill="#0d0d14" />
+    <!-- Water Tower Structure -->
+    <line x1="655" y1="175" x2="650" y2="148" stroke="#252535" stroke-width="1.5" />
+    <line x1="685" y1="175" x2="690" y2="148" stroke="#252535" stroke-width="1.5" />
+    <line x1="650" y1="148" x2="690" y2="148" stroke="#252535" stroke-width="1.5" />
+    <ellipse cx="670" cy="140" rx="18" ry="12" fill="#0f0f16" stroke="#2a2a3c" stroke-width="1.2" />
+    <polygon points="670,122 652,138 688,138" fill="#0f0f16" stroke="#2a2a3c" stroke-width="1.2" />
+
+    <rect x="710" y="220" width="70" height="85" fill="#08080c" />
+    <rect x="770" y="190" width="60" height="115" fill="#0a0a0f" />
+  </g>
+
+  <!-- Comic Shadow Crosshatch Overlay on Buildings -->
+  <rect x="95" y="190" width="65" height="115" fill="url(#crosshatch)" opacity="0.6" />
+  <rect x="375" y="205" width="115" height="100" fill="url(#crosshatch)" opacity="0.6" />
+  <rect x="630" y="185" width="85" height="120" fill="url(#crosshatch)" opacity="0.6" />
+
+  <!-- Noir Rain & Scratchy Comic Inking Streaks -->
+  <g stroke="#262635" stroke-width="0.8" opacity="0.35" stroke-linecap="round">
+    <line x1="75" y1="35" x2="65" y2="65" />
+    <line x1="140" y1="70" x2="130" y2="105" />
+    <line x1="220" y1="40" x2="210" y2="75" />
+    <line x1="330" y1="60" x2="320" y2="90" />
+    <line x1="510" y1="45" x2="500" y2="75" />
+    <line x1="620" y1="65" x2="610" y2="100" />
+    <line x1="740" y1="35" x2="730" y2="70" />
+    <line x1="795" y1="80" x2="785" y2="115" />
+  </g>
+
+  <!-- Ambient Drifting Floating Embers -->
+  <g fill="#FF3030" filter="url(#inkGlow)">
+    <circle cx="210" cy="180" r="1.5" class="ink-ember-1" />
+    <circle cx="340" cy="210" r="1.2" class="ink-ember-2" />
+    <circle cx="620" cy="190" r="1.6" class="ink-ember-3" />
+    <circle cx="480" cy="240" r="1.3" class="ink-ember-1" />
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- ORGANIC HAND-DRAWN SPIDER WEB STRANDS                   -->
+  <!-- ======================================================== -->
+  <!-- Top Left Corner Organic Web Lattice -->
+  <g stroke="#484858" stroke-width="0.9" fill="none" opacity="0.55">
+    <path d="M 12 12 Q 95 18 160 28" />
+    <path d="M 12 12 Q 75 65 130 90" />
+    <path d="M 12 12 Q 55 105 85 160" />
+    <path d="M 12 12 Q 30 145 35 220" />
+
+    <!-- Irregular Hand-drawn Sagging Cross-Web Arcs -->
+    <path d="M 42 15 Q 38 42 15 50" stroke="#E50914" stroke-opacity="0.45" />
+    <path d="M 78 17 Q 68 68 16 88" />
+    <path d="M 115 22 Q 98 102 18 135" stroke="#E50914" stroke-opacity="0.4" />
+    <path d="M 152 26 Q 128 135 22 185" />
+  </g>
+
+  <!-- Top Right & Bottom Right Corner Web Meshes -->
+  <g stroke="#484858" stroke-width="0.9" fill="none" opacity="0.5">
+    <path d="M 838 12 Q 755 18 690 28" />
+    <path d="M 838 12 Q 775 65 720 90" />
+    <path d="M 838 308 Q 740 300 660 290" />
+    <path d="M 838 308 Q 765 240 730 190" />
+
+    <path d="M 808 14 Q 802 44 835 50" />
+    <path d="M 768 18 Q 758 72 834 88" stroke="#E50914" stroke-opacity="0.45" />
+    <path d="M 728 24 Q 708 108 832 135" />
+    <path d="M 808 306 Q 800 270 834 260" stroke="#E50914" stroke-opacity="0.45" />
+  </g>
+
+  <!-- Main Traverse Web Silk Strand (Natural sagging curve) -->
+  <g fill="none">
+    <!-- Midnight Blue Shadow Line behind strand -->
+    <path d="M 25 35 Q 210 92 425 118 T 825 50" stroke="#080c16" stroke-width="3" opacity="0.9" />
+    <!-- Hand-drawn Primary Silk Thread -->
+    <path d="M 25 35 Q 210 92 425 118 T 825 50" stroke="#5a5a6e" stroke-width="1.2" opacity="0.75" />
+    <!-- Secondary Crimson Silk Core -->
+    <path d="M 160 78 Q 425 122 690 85" stroke="#E50914" stroke-width="0.8" opacity="0.45" />
+
+    <!-- Connecting Tension Droplets & Vertical Anchors -->
+    <path d="M 210 92 L 255 155" stroke="#383848" stroke-width="0.8" opacity="0.4" />
+    <path d="M 425 118 L 425 285" stroke="#E50914" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.35" />
+    <path d="M 640 95 L 670 148" stroke="#383848" stroke-width="0.8" opacity="0.4" />
+  </g>
+
+  <!-- Pulsing Crimson Web Nodes (Tension Points) -->
+  <g fill="#E50914" filter="url(#inkGlow)">
+    <circle cx="130" cy="90" r="2.5" class="crimson-node" />
+    <circle cx="210" cy="92" r="3.2" class="crimson-node" style="animation-delay: 0.8s;" />
+    <!-- Central Node -->
+    <circle cx="425" cy="118" r="4.2" class="crimson-node" style="animation-delay: 1.5s;" fill="#FF3030" />
+    <circle cx="640" cy="95" r="3.2" class="crimson-node" style="animation-delay: 2.2s;" />
+    <circle cx="720" cy="90" r="2.5" class="crimson-node" style="animation-delay: 0.4s;" />
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- CRAWLING SPIDER (Realistic 8-Legged Articulation)        -->
+  <!-- ======================================================== -->
+  <g class="spider-walker" filter="url(#comicShadow)">
+    <g transform="scale(0.88)">
+      <!-- Spider Abdomen (Dark Chitin Teardrop with Crimson Accent) -->
+      <ellipse cx="10" cy="16" rx="4.8" ry="6.2" fill="#0d0d12" stroke="#22222e" stroke-width="0.9" />
+      <!-- Graphic Novel Crimson Hourglass / Dorsal Inking -->
+      <polygon points="8.5,13.5 11.5,13.5 9,16.5 11.5,19.5 8.5,19.5 11,16.5" fill="#E50914" opacity="0.9" />
+
+      <!-- Cephalothorax (Head/Chest) -->
+      <circle cx="10" cy="9" r="3.8" fill="#14141d" stroke="#282838" stroke-width="0.8" />
+      <!-- Glowing Red Spider Eyes -->
+      <circle cx="9" cy="7.2" r="0.65" fill="#FF3030" />
+      <circle cx="11" cy="7.2" r="0.65" fill="#FF3030" />
+
+      <!-- Pedipalps (Front Feelers) -->
+      <path d="M 8.5 6.5 L 7 4.2" stroke="#2a2a3a" stroke-width="0.9" stroke-linecap="round" fill="none" />
+      <path d="M 11.5 6.5 L 13 4.2" stroke="#2a2a3a" stroke-width="0.9" stroke-linecap="round" fill="none" />
+
+      <!-- 8 Articulated Curved Chitin Legs -->
+      <!-- Left Legs (L1, L2, L3, L4) with 2-Phase Walk Gait -->
+      <g class="legs-left-group" stroke="#222230" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 7.5 8 L 2.5 4.5 L -0.5 7.5" />
+        <path d="M 7 9.5 L 1 9 L -1.5 13" />
+        <path d="M 7 11.5 L 1.5 14 L -0.5 18.5" />
+        <path d="M 7.5 13.5 L 3 18.5 L 0.5 24" />
+      </g>
+
+      <!-- Right Legs (R1, R2, R3, R4) -->
+      <g class="legs-right-group" stroke="#222230" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 12.5 8 L 17.5 4.5 L 20.5 7.5" />
+        <path d="M 13 9.5 L 19 9 L 21.5 13" />
+        <path d="M 13 11.5 L 18.5 14 L 20.5 18.5" />
+        <path d="M 12.5 13.5 L 17 18.5 L 19.5 24" />
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- HAND-INKED GRAPHIC NOVEL PANEL BORDER                   -->
+  <!-- ======================================================== -->
+  <!-- Outer Rough Comic Frame -->
+  <g fill="none">
+    <!-- Midnight Blue Cast Shadow Frame -->
+    <rect x="17" y="17" width="816" height="286" stroke="#10182A" stroke-width="2.5" opacity="0.8" />
+    <!-- Charcoal Ink Border with Slight Rough Imperfections -->
+    <rect x="15" y="15" width="820" height="290" stroke="#22222e" stroke-width="2" />
+    <rect x="19" y="19" width="812" height="282" stroke="#14141c" stroke-width="0.8" stroke-dasharray="12 6" />
+
+    <!-- Corner Inked Brackets & Crimson Corner Accents -->
+    <g stroke="#E50914" stroke-width="2">
+      <!-- Top-Left -->
+      <path d="M 12 36 L 12 12 L 36 12" />
+      <circle cx="24" cy="24" r="1.5" fill="#E50914" />
+      <!-- Top-Right -->
+      <path d="M 838 36 L 838 12 L 814 12" />
+      <circle cx="826" cy="24" r="1.5" fill="#E50914" />
+      <!-- Bottom-Left -->
+      <path d="M 12 284 L 12 308 L 36 308" />
+      <circle cx="24" cy="296" r="1.5" fill="#E50914" />
+      <!-- Bottom-Right -->
+      <path d="M 838 284 L 838 308 L 814 308" />
+      <circle cx="826" cy="296" r="1.5" fill="#E50914" />
+    </g>
+  </g>
+
+  <!-- Graphic Novel Header / Issue Annotations -->
+  <g font-family="'Consolas', 'Fira Code', monospace" font-size="9" fill="#58586c" letter-spacing="1.5">
+    <text x="38" y="38">[ NOIR_ISSUE // #071 ]</text>
+    <text x="812" y="38" text-anchor="end">[ SEC // 21.14° N ]</text>
+    <text x="38" y="288">[ SPLASH_PANEL // 01 ]</text>
+    <text x="812" y="288" text-anchor="end">[ ARCH // PROT_ANM ]</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- CENTER IDENTITY : HAND-LETTERED GRAPHIC NOVEL TITLE      -->
+  <!-- ======================================================== -->
+  <g transform="translate(425, 185)">
+    <!-- Deep Crimson Offset Ink Bleed (+4, +4) -->
+    <text x="4" y="4"
+          text-anchor="middle"
+          font-family="-apple-system, BlinkMacSystemFont, 'Montserrat', 'Impact', 'Arial Black', sans-serif"
+          font-weight="900"
+          font-size="64"
+          letter-spacing="16"
+          fill="#E50914"
+          opacity="0.8"
+          filter="url(#inkGlow)">
+      ANIMESH
+    </text>
+
+    <!-- Dark Contrast Charcoal Under-Ink Layer (+1.5, +1.5) -->
+    <text x="1.5" y="1.5"
+          text-anchor="middle"
+          font-family="-apple-system, BlinkMacSystemFont, 'Montserrat', 'Impact', 'Arial Black', sans-serif"
+          font-weight="900"
+          font-size="64"
+          letter-spacing="16"
+          fill="#0a0a0f">
+      ANIMESH
+    </text>
+
+    <!-- Main Hand-Lettered Surface (Crisp Off-White Platinum) -->
+    <text x="0" y="0"
+          text-anchor="middle"
+          font-family="-apple-system, BlinkMacSystemFont, 'Montserrat', 'Impact', 'Arial Black', sans-serif"
+          font-weight="900"
+          font-size="64"
+          letter-spacing="16"
+          fill="#F2F2F2">
+      ANIMESH
+    </text>
+
+    <!-- Hand-Inked Comic Caption Box for "just living." -->
+    <g transform="translate(0, 36)">
+      <!-- Caption Box Base -->
+      <rect x="-85" y="-12" width="170" height="24" fill="#0c0c12" stroke="#22222f" stroke-width="1.2" />
+      <!-- Red Corner Ink Accent on Caption Box -->
+      <line x1="-85" y1="-12" x2="-75" y2="-12" stroke="#E50914" stroke-width="1.8" />
+      <line x1="-85" y1="-12" x2="-85" y2="-2" stroke="#E50914" stroke-width="1.8" />
+      <line x1="85" y1="12" x2="75" y2="12" stroke="#E50914" stroke-width="1.8" />
+      <line x1="85" y1="12" x2="85" y2="2" stroke="#E50914" stroke-width="1.8" />
+
+      <!-- Caption Text -->
+      <text x="0" y="4"
+            text-anchor="middle"
+            font-family="'Consolas', 'Fira Code', 'Courier New', monospace"
+            font-weight="500"
+            font-size="14"
+            letter-spacing="4"
+            fill="#8A8A8A">
+        "just living."
+      </text>
+    </g>
+
+    <!-- Subtle Graphic Novel Technical Sub-Annotations -->
+    <g transform="translate(0, 78)" font-family="'Consolas', 'Fira Code', monospace" font-size="10" letter-spacing="2.5" fill="#626274">
+      <text x="0" text-anchor="middle">
+        <tspan fill="#888898">AI</tspan>
+        <tspan fill="#E50914" font-weight="bold"> · </tspan>
+        <tspan fill="#888898">SYSTEMS</tspan>
+        <tspan fill="#E50914" font-weight="bold"> · </tspan>
+        <tspan fill="#888898">CODE</tspan>
+        <tspan fill="#E50914" font-weight="bold"> · </tspan>
+        <tspan fill="#888898">RESEARCH</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

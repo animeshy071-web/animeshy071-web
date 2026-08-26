@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 145" width="100%" height="145">
+  <defs>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0f" />
+      <stop offset="100%" stop-color="#070709" />
+    </linearGradient>
+
+    <pattern id="cardDotsP1" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.65" fill="#ffffff" fill-opacity="0.025" />
+    </pattern>
+
+    <pattern id="cardHatch1" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="6" y2="6" stroke="#1c1c28" stroke-width="0.7" opacity="0.45" />
+    </pattern>
+  </defs>
+
+  <!-- Comic Shadow Frame (+2, +3) -->
+  <rect x="7" y="7" width="398" height="133" fill="#10182A" opacity="0.7" />
+
+  <!-- Main Comic Panel Card -->
+  <rect x="5" y="5" width="400" height="135" fill="url(#cardGrad1)" stroke="#22222e" stroke-width="1.5" />
+  <rect x="5" y="5" width="400" height="135" fill="url(#cardDotsP1)" />
+  <rect x="290" y="75" width="115" height="65" fill="url(#cardHatch1)" />
+
+  <!-- Hand-Inked Corner Brackets & Crimson Ink Ticks -->
+  <path d="M 5 24 L 5 5 L 24 5" fill="none" stroke="#E50914" stroke-width="2" />
+  <circle cx="16" cy="16" r="1.5" fill="#E50914" />
+  <path d="M 405 120 L 405 140 L 385 140" fill="none" stroke="#E50914" stroke-width="2" />
+
+  <!-- Hand-Drawn Web Strands (Top-Left Web Corner Anchor) -->
+  <g stroke="#3a3a4c" stroke-width="0.8" fill="none" opacity="0.45">
+    <path d="M 5 5 L 55 12" />
+    <path d="M 5 5 L 35 40" />
+    <path d="M 5 5 L 18 55" />
+    <path d="M 28 8 Q 24 24 8 28" stroke="#E50914" stroke-opacity="0.5" />
+    <circle cx="45" cy="11" r="2" fill="#FF3030" />
+  </g>
+
+  <!-- Panel Annotation / Repo ID -->
+  <text x="388" y="24" font-family="'Consolas', 'Fira Code', monospace" font-size="9" fill="#58586c" letter-spacing="1" text-anchor="end">
+    [ REPO // 01 ]
+  </text>
+
+  <!-- Project Name -->
+  <text x="24" y="44"
+        font-family="-apple-system, BlinkMacSystemFont, 'Impact', 'Montserrat', 'Segoe UI', sans-serif"
+        font-weight="900"
+        font-size="19"
+        letter-spacing="2"
+        fill="#F2F2F2">
+    SIS
+  </text>
+  <text x="68" y="43"
+        font-family="'Consolas', monospace"
+        font-size="11"
+        fill="#727284">
+    / SIPORTAL
+  </text>
+
+  <!-- One-Line Description -->
+  <text x="24" y="75"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="12"
+        fill="#9292A4">
+    Modern cloud-powered Student Information System &amp; portal.
+  </text>
+
+  <!-- Subtle Inked Divider -->
+  <line x1="24" y1="95" x2="385" y2="95" stroke="#1c1c28" stroke-width="1" />
+
+  <!-- Technology Badges / Stack -->
+  <g font-family="'Consolas', 'Fira Code', monospace" font-size="11" letter-spacing="0.5">
+    <text x="24" y="118" fill="#A8A8BA">
+      <tspan fill="#D0D0E0">React</tspan>
+      <tspan fill="#E50914" font-weight="bold"> · </tspan>
+      <tspan fill="#D0D0E0">Firebase</tspan>
+      <tspan fill="#E50914" font-weight="bold"> · </tspan>
+      <tspan fill="#D0D0E0">TypeScript</tspan>
+      <tspan fill="#E50914" font-weight="bold"> · </tspan>
+      <tspan fill="#88889a">Tailwind</tspan>
+    </text>
+  </g>
+
+  <!-- Link Arrow Glyph -->
+  <g transform="translate(378, 112)" stroke="#E50914" stroke-width="1.4" fill="none">
+    <path d="M 0 5 L 8 5 L 4 1" />
+    <path d="M 8 5 L 4 9" />
+  </g>
+</svg>
