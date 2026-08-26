@@ -117,6 +117,14 @@
 
 <br />
 
+<div align="center">
+  <a href="https://github.com/animeshy071-web">
+    <img src="https://ghchart.rshah.org/E50914/animeshy071-web" alt="Real-Time Annual Contribution Graph" width="850" style="max-width: 100%; height: auto;" />
+  </a>
+</div>
+
+<br />
+
 <!-- =================================================== -->
 <!-- FOOTER : DANGLING SILK STRAND                       -->
 <!-- =================================================== -->
