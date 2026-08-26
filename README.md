@@ -105,21 +105,19 @@
 <br />
 
 <!-- =================================================== -->
-<!-- GITHUB ACTIVITY : TELEMETRY & COMMIT MATRIX         -->
+<!-- GITHUB ACTIVITY : LIVE CONTRIBUTION FEED            -->
 <!-- =================================================== -->
 <div align="center">
   <img src="./assets/header-activity.svg" alt="Panel 03 - Activity Header" width="850" style="max-width: 100%; height: auto;" />
 </div>
 
 <div align="center">
-  <img src="./assets/github-metrics.svg" alt="Telemetry Matrix Panel" width="850" style="max-width: 100%; height: auto;" />
+  <img src="./assets/swinging-spider.svg" alt="Swinging Scarlet Spider" width="850" style="max-width: 100%; height: auto;" />
 </div>
-
-<br />
 
 <div align="center">
   <a href="https://github.com/animeshy071-web">
-    <img src="https://ghchart.rshah.org/E50914/animeshy071-web" alt="Real-Time Annual Contribution Graph" width="850" style="max-width: 100%; height: auto;" />
+    <img src="https://ghchart.rshah.org/E50914/animeshy071-web" alt="Real Contribution Graph - animeshy071-web" width="850" style="max-width: 100%; height: auto;" />
   </a>
 </div>
 
