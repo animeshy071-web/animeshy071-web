@@ -112,7 +112,9 @@
 </div>
 
 <div align="center">
-  <img src="./assets/swinging-spider.gif" alt="Swinging Scarlet Spider-Man" width="850" style="max-width: 100%; height: auto;" />
+  <a href="https://github.com/animeshy071-web">
+    <img src="./assets/devspidey90.gif" alt="Swinging Spider" height="190" />
+  </a>
 </div>
 
 <div align="center">
