@@ -112,9 +112,7 @@
 </div>
 
 <div align="center">
-  <a href="https://github.com/animeshy071-web">
-    <img src="./assets/devspidey90.gif" alt="Swinging Spider" height="190" />
-  </a>
+  <img src="./assets/devspidey90.gif" alt="Spider-Man Travelling across GitHub Commits Metropolis" width="850" style="max-width: 100%; height: auto;" />
 </div>
 
 <div align="center">
