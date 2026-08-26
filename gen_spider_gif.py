@@ -1,280 +1,307 @@
 """
-gen_spider_gif.py v2 — High-quality animated GIF using SPRITE ROTATION.
-The whole character image is rotated as one unit per frame, giving clean
-anti-aliased motion instead of rotated individual pixel blocks.
+Precision Pixel-Art Spider-Man Swing Engine
+- Two distinct iconic white eye lenses with red eyeliner
+- Raised hands gripped on the web thread
+- Exact mathematical pivot at the hands so the silk thread connects 100% seamlessly at every frame
+- Dynamic web-shooting from free arm when swinging
 """
+
 from PIL import Image, ImageDraw
-import math, os
+import math
+import os
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CANVAS & ANIMATION
-# ─────────────────────────────────────────────────────────────────────────────
-W, H   = 850, 220
-FRAMES = 40
-DUR    = 55       # ms/frame → 40×55 = 2.2s seamless loop
+W, H = 850, 240
+FRAMES = 36
+DUR = 50
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SPRITE SETTINGS
-# ─────────────────────────────────────────────────────────────────────────────
-SCALE  = 7        # actual px per character-pixel block
-# Character grid size in character-pixels
-CW, CH = 22, 34   # 22 wide × 34 tall → sprite = 154×238px
+C_TRANS = (0, 0, 0, 0)
+C_OUT   = (0, 0, 4, 255)
+C_K_D   = (10, 10, 16, 255)
+C_K_M   = (22, 22, 32, 255)
+C_K_L   = (40, 40, 56, 255)
+C_R_D   = (130, 5, 10, 255)
+C_R_M   = (225, 10, 24, 255)
+C_R_L   = (255, 60, 65, 255)
+C_W     = (255, 255, 255, 255)
+C_W_S   = (200, 210, 235, 255)
+C_E_R   = (235, 15, 25, 255)
 
-# Colors (RGBA)
-DARK  = (20,  20,  30,  255)
-DRK   = (10,  10,  18,  255)
-RED   = (196, 0,   12,  255)
-BRED  = (229, 9,   20,  255)
-EYE   = (240, 244, 255, 255)
-EYE2  = (185, 200, 240, 255)
-TRANS = (0, 0, 0, 0)
+COLOR_MAP = {
+    '.': C_TRANS,
+    '#': C_OUT,
+    'K': C_K_D,
+    'k': C_K_M,
+    'L': C_K_L,
+    'R': C_R_M,
+    'r': C_R_D,
+    'B': C_R_L,
+    'W': C_W,
+    'w': C_W_S,
+    'E': C_E_R
+}
 
-# Canvas colors (RGB)
-BG    = (5,   5,   5)
-SILK  = (185, 188, 208)
-WEB_C = (229, 9,   20)
-LABEL = (72,  72,  92)
+# 36x44 High-Detail Pixel Art
+# Pose 1: Center Swoop (Both hands gripped high on web line, two sharp distinct eyes)
+SPRITE_CENTER = """
+....................####....................
+...................#RRRR#...................
+...................#RBBB#...................
+...................#kRRk#...................
+..................#KKKKKK#..................
+.................#KKkLLkKK#.................
+................#KkLLLLLLkK#................
+................#kLEWkkWELk#................
+................#kEWWwwWWEk#................
+................#kEWWwwWWEk#................
+................#kLEEEEEELk#................
+.................#kLLLLLLk#.................
+..................#kkRRkk#..................
+.........####......#kRRk#......####.........
+........#RRRR#....#rRBBRr#....#RRRR#........
+.......#RBBBBR#..#rRBBkBRr#..#RBBBBR#.......
+.......#kRBkkR#.##kRBkKKkBR##.#RkkBRk#......
+........#kRkkR##kRkkKKKKkkRk##RkkRk#........
+.........#kRRkRkRkKKKKKKKKkRkRkRRk#.........
+..........#kRRkRkKKKKKKKKKKkRkRRk#..........
+...........#kRRkkKKKKKKKKKKkkRRk#...........
+............#kRkKKKKKKKKKKKKkRk#............
+.............#kRkKKKKKKKKKKkRk#.............
+..............#kRkKKKKKKKKkRk#..............
+...............#kkRRRRRRRRkk#...............
+................#kRRRRRRRRk#................
+...............#kKKKKKKKKKKk#...............
+..............#kKKk......kKKk#..............
+.............#kKKk........kKKk#.............
+............#kKKk..........kKKk#............
+...........#kKKk............kKKk#...........
+...........#kKk..............kKk#...........
+..........#kKk................kKk#..........
+..........#kKk................kKk#..........
+..........#rRk................kRr#..........
+.........#rRBk................kBRr#.........
+.........#rRBk................kBRr#.........
+..........#RRk................kRR#..........
+..........#kk#................#kk#..........
+............................................
+"""
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PENDULUM
-# ─────────────────────────────────────────────────────────────────────────────
-AX, AY = 425, 5
-TLEN   = 100    # anchor → hand distance (not torso center)
-AMP    = 40.0   # swing degrees
+# Pose 2: Angled Swing (Left hand gripping web high, right hand extended/shooting, legs trailing)
+SPRITE_SWING = """
+................####........................
+...............#RRRR#.......................
+...............#RBBB#.......................
+...............#kRRk#.......................
+..............#KKKKKK#......................
+.............#KKkLLkKK#.....................
+............#KkLLLLLLkK#....................
+............#kLEWkkWELk#....................
+............#kEWWwwWWEk#....................
+............#kEWWwwWWEk#....................
+............#kLEEEEEELk#....................
+.............#kLLLLLLk#.....................
+..............#kkRRkk#......................
+...............#kRRk#.......####............
+..............#rRBBRr#.....#RRRR#...........
+.............#rRBBkBRr#...#RBBBBR#..........
+............#kRBkKKkBRk#..#kRBkkR#..........
+...........#kRkkKKKKkkRk###kRkkRk#..........
+..........#kRkKKKKKKKKkRkRkRkkRk#...........
+.........#kRkKKKKKKKKKKkRkRRRRk#............
+..........#kRRkkKKKKKKKKkRkRRk#.............
+...........#kRkKKKKKKKKKKkRk#...............
+............#kRkKKKKKKKKkRk#................
+.............#kkRRRRRRRRkk#.................
+..............#kRRRRRRRRk#..................
+.............#kKKKKKKKKKKk#.................
+............#kKKk......kKKk#................
+...........#kKKk........kKKk#...............
+..........#kKKk..........kKKk#..............
+.........#kKKk............kKk#..............
+........#kKk...............#k#..............
+.......#kKk.................................
+......#rRBk.................................
+......#rRBk.................................
+.......#RRk.................................
+.......#kk#.................................
+............................................
+"""
 
-def swing_angle(f):
-    return AMP * math.cos(2.0 * math.pi * f / FRAMES)
-
-# ─────────────────────────────────────────────────────────────────────────────
-# BUILD CHARACTER SPRITE (RGBA, transparent bg)
-# ─────────────────────────────────────────────────────────────────────────────
-def make_sprite():
-    """
-    Design: Scarlet-style spider-hero. Front-facing body.
-    LEFT ARM raised UP-LEFT diagonally (web-grabbing arm) — this is the pivot.
-    RIGHT ARM extended outward.
-    Legs: dynamic swinging pose.
-    """
-    img = Image.new('RGBA', (CW * SCALE, CH * SCALE), TRANS)
-    d   = ImageDraw.Draw(img)
-
-    def b(col, row, color):
-        if 0 <= col < CW and 0 <= row < CH:
-            x0, y0 = col * SCALE, row * SCALE
-            d.rectangle([x0, y0, x0 + SCALE - 1, y0 + SCALE - 1], fill=color)
-
-    # ── RAISED LEFT ARM (web-grabbing, points up-left) ────────────────────
-    # Hand/wrist at top-left area → this is the thread attachment
-    b(1,  0,  RED)    # hand / web-shooter tip   ← thread attaches here
-    b(2,  0,  RED)
-    b(1,  1,  RED)    # wrist
-    b(2,  2,  RED)    # forearm cuff
-    b(3,  3,  DARK)   # forearm
-    b(4,  4,  DARK)   # upper arm
-    b(5,  5,  DARK)   # shoulder area
-
-    # ── HEAD (centered ~cols 7–14) ────────────────────────────────────────
-    # Row 2: narrow top
-    for c in range(8, 14):    b(c, 2, DARK)
-    # Row 3: wide head
-    for c in range(7, 15):    b(c, 3, DARK)
-    # Row 4: full head
-    for c in range(7, 15):    b(c, 4, DARK)
-    # Row 5: EYE ROW 1 — large angular white lenses
-    b(7,  5, DARK)
-    b(8,  5, EYE);  b(9,  5, EYE)     # left lens
-    b(10, 5, DARK)                      # bridge
-    b(11, 5, EYE);  b(12, 5, EYE);  b(13, 5, EYE)   # right lens (wider)
-    b(14, 5, DARK)
-    # Row 6: EYE ROW 2 — bottom of lenses
-    b(7,  6, DARK)
-    b(8,  6, EYE);  b(9,  6, EYE);  b(10, 6, EYE)   # left lens wider at bottom
-    b(11, 6, DARK)                                     # bridge
-    b(12, 6, EYE);  b(13, 6, EYE)                    # right lens
-    b(14, 6, DARK)
-    # Row 7: lower face
-    for c in range(7, 15):    b(c, 7, DARK)
-    # Row 8: chin
-    for c in range(8, 14):    b(c, 8, DARK)
-
-    # ── NECK ─────────────────────────────────────────────────────────────
-    b(10, 9, DARK);  b(11, 9, DARK);  b(10, 10, DARK);  b(11, 10, DARK)
-
-    # ── TORSO ────────────────────────────────────────────────────────────
-    # Row 11: shoulders (red accents on outer edges)
-    b(6,  11, DARK)
-    b(7,  11, RED);  b(8,  11, RED)   # left shoulder red
-    for c in range(9, 14):  b(c, 11, DARK)
-    b(14, 11, RED);  b(15, 11, RED)   # right shoulder red
-    b(16, 11, DARK)
-
-    # Row 12: upper chest
-    b(6,  12, DRK)
-    b(7,  12, DARK)
-    b(8,  12, RED)
-    for c in range(9, 14):  b(c, 12, DARK)
-    b(14, 12, RED)
-    b(15, 12, DARK)
-    b(16, 12, DRK)
-
-    # Row 13: chest web logo — bright red wings
-    b(7,  13, DARK)
-    b(8,  13, BRED)    # logo left wing
-    for c in range(9, 13):  b(c, 13, DARK)
-    b(13, 13, BRED)    # logo right wing
-    b(14, 13, DARK)
-
-    # Row 14: mid-chest
-    for c in range(7, 16):  b(c, 14, DARK)
-
-    # Rows 15-17: torso body
-    for r in (15, 16, 17):
-        for c in range(7, 16):  b(c, r, DARK)
-
-    # Row 18: waist
-    for c in range(8, 15):  b(c, 18, DARK)
-
-    # Row 19: hips
-    for c in range(8, 15):  b(c, 19, DRK)
-
-    # ── RIGHT ARM (free arm, extends RIGHT) ───────────────────────────────
-    b(16, 12, DARK)
-    b(17, 12, DARK)
-    b(18, 13, DARK)
-    b(19, 14, DARK)
-    b(19, 15, RED)    # forearm red
-    b(18, 16, RED)
-    b(17, 16, RED)    # fist
-
-    # ── LEFT LEG (swept back/left) ─────────────────────────────────────────
-    b(9,  20, DARK);  b(8,  20, RED)    # thigh red stripe
-    b(8,  21, DARK)
-    b(7,  22, DARK);  b(7,  23, RED)    # calf
-    b(6,  24, DARK);  b(6,  25, RED)    # boot
-    b(5,  25, DARK);  b(7,  25, DARK)
-
-    # ── RIGHT LEG (sweeps forward/right) ───────────────────────────────────
-    b(12, 20, DARK);  b(13, 20, RED)    # thigh red stripe
-    b(13, 21, DARK)
-    b(14, 22, DARK);  b(14, 23, RED)    # calf
-    b(15, 24, DARK);  b(15, 25, RED)    # boot
-    b(14, 25, DARK);  b(16, 25, DARK)
-
+def parse_sprite(text_art):
+    lines = [l.strip() for l in text_art.strip().split('\n') if l.strip()]
+    height = len(lines)
+    width = max(len(l) for l in lines)
+    img = Image.new('RGBA', (width, height), C_TRANS)
+    for y, line in enumerate(lines):
+        for x, char in enumerate(line):
+            color = COLOR_MAP.get(char, C_TRANS)
+            img.putpixel((x, y), color)
     return img
 
-SPRITE = make_sprite()
+SPR_IMG_CENTER = parse_sprite(SPRITE_CENTER)
+SPR_IMG_SWING = parse_sprite(SPRITE_SWING)
 
-# Hand attachment point in SPRITE SPACE (before rotation)
-# Hand is at character-pixel (1, 0) → in actual pixels relative to sprite origin
-HAND_SX = 1 * SCALE + SCALE // 2   # center of block (1,0)
-HAND_SY = 0 * SCALE + SCALE // 2
+def render_scene():
+    anchor = (425, 14)
+    thread_len = 100
+    max_angle = 35.0
+    scale = 3.0
+    
+    spr_center = SPR_IMG_CENTER.resize(
+        (int(SPR_IMG_CENTER.width * scale), int(SPR_IMG_CENTER.height * scale)),
+        Image.NEAREST
+    )
+    spr_swing = SPR_IMG_SWING.resize(
+        (int(SPR_IMG_SWING.width * scale), int(SPR_IMG_SWING.height * scale)),
+        Image.NEAREST
+    )
+    
+    # Hand grip position in sprite local coordinates (top row center of hands)
+    center_hand_x = spr_center.width * 0.49
+    center_hand_y = spr_center.height * 0.04
+    
+    swing_hand_x = spr_swing.width * 0.40
+    swing_hand_y = spr_swing.height * 0.04
+    
+    frames = []
+    
+    for i in range(FRAMES):
+        t = i / FRAMES
+        angle = max_angle * math.sin(2.0 * math.pi * t)
+        velocity = (2.0 * math.pi / FRAMES) * max_angle * math.cos(2.0 * math.pi * t)
+        speed = abs(velocity)
+        
+        # Base canvas
+        canvas = Image.new('RGBA', (W, H), (6, 6, 9, 255))
+        draw = ImageDraw.Draw(canvas)
+        
+        # Outer Comic Panel Border & Dark Charcoal Surface
+        draw.rectangle([5, 5, W-5, H-5], fill=(9, 9, 14, 255), outline=(30, 30, 42, 255), width=2)
+        
+        # Cinematic Noir Skyline Silhouettes
+        skyline_pts = [
+            (5, H-5), (40, 185), (90, 185), (115, 160), (145, 160), (165, 200),
+            (260, 200), (285, 150), (335, 150), (355, 210), (500, 210),
+            (530, 140), (575, 140), (605, 190), (715, 190), (745, 155),
+            (795, 155), (825, 185), (W-5, 185), (W-5, H-5)
+        ]
+        draw.polygon(skyline_pts, fill=(15, 15, 23, 255))
+        
+        # Water tower & architectural spires
+        draw.rectangle([120, 142, 140, 160], fill=(20, 20, 30, 255))
+        draw.polygon([(115, 142), (145, 142), (130, 130)], fill=(22, 22, 34, 255))
+        
+        # Distant glowing crimson beacon dots in city
+        draw.ellipse([730, 35, 735, 40], fill=(229, 9, 20, 255))
+        draw.ellipse([150, 45, 154, 49], fill=(255, 48, 48, 255))
+        
+        # Background web strands
+        draw.line([(5, 5), (190, 65)], fill=(28, 28, 40, 255), width=1)
+        draw.line([(W-5, 5), (650, 65)], fill=(28, 28, 40, 255), width=1)
+        
+        # Sprite selection
+        if abs(angle) < 14:
+            base_spr = spr_center
+            local_hx = center_hand_x
+            local_hy = center_hand_y
+            flip = False
+        elif angle >= 14:
+            base_spr = spr_swing
+            local_hx = swing_hand_x
+            local_hy = swing_hand_y
+            flip = False
+        else: # angle <= -14
+            base_spr = spr_swing.transpose(Image.FLIP_LEFT_RIGHT)
+            local_hx = base_spr.width - swing_hand_x
+            local_hy = swing_hand_y
+            flip = True
+            
+        # Physics rotation
+        rot_angle = -angle * 0.75
+        rad_rot = math.radians(rot_angle)
+        
+        # Rotate sprite
+        rotated_spr = base_spr.rotate(rot_angle, resample=Image.BICUBIC, expand=True)
+        
+        # Pendulum trajectory for gripped hand
+        rad_swing = math.radians(angle)
+        hand_world_x = anchor[0] + thread_len * math.sin(rad_swing)
+        hand_world_y = anchor[1] + thread_len * math.cos(rad_swing)
+        
+        # Calculate offset from sprite center to gripped hand in rotated sprite
+        orig_cx = base_spr.width / 2.0
+        orig_cy = base_spr.height / 2.0
+        dx = local_hx - orig_cx
+        dy = local_hy - orig_cy
+        
+        # Rotate offset
+        rot_dx = dx * math.cos(rad_rot) - dy * math.sin(rad_rot)
+        rot_dy = dx * math.sin(rad_rot) + dy * math.cos(rad_rot)
+        
+        # Rotated sprite center position in world space
+        spr_world_cx = hand_world_x - rot_dx
+        spr_world_cy = hand_world_y - rot_dy
+        
+        paste_x = int(spr_world_cx - rotated_spr.width / 2.0)
+        paste_y = int(spr_world_cy - rotated_spr.height / 2.0)
+        
+        # Catenary silk tension sag
+        sag_x = (1 if angle > 0 else -1) * (1.0 - speed / 6.0) * 8
+        sag_y = abs(sag_x) * 0.35
+        mid_x = (anchor[0] + hand_world_x) / 2 + sag_x
+        mid_y = (anchor[1] + hand_world_y) / 2 + sag_y
+        
+        # Draw smooth silk web line directly to hand
+        pts = []
+        for step in range(16):
+            u = step / 15.0
+            bx = (1-u)**2 * anchor[0] + 2*(1-u)*u * mid_x + u**2 * hand_world_x
+            by = (1-u)**2 * anchor[1] + 2*(1-u)*u * mid_y + u**2 * hand_world_y
+            pts.append((bx, by))
+            
+        draw.line(pts, fill=(120, 130, 160, 255), width=3)
+        draw.line(pts, fill=(245, 248, 255, 255), width=2)
+        
+        # Web shooting stream at apex from free hand
+        is_rising = (angle * velocity) > 0
+        if is_rising and speed > 0.3:
+            shoot_target = (spr_world_cx + (380 if velocity > 0 else -380), spr_world_cy - 120)
+            web_origin = (spr_world_cx + (30 if velocity > 0 else -30), spr_world_cy - 5)
+            draw.line([web_origin, shoot_target], fill=(229, 9, 20, 180), width=4)
+            draw.line([web_origin, shoot_target], fill=(255, 255, 255, 255), width=2)
+            # Muzzle burst
+            draw.ellipse([web_origin[0]-7, web_origin[1]-7, web_origin[0]+7, web_origin[1]+7], fill=(255, 255, 255, 255))
+            draw.ellipse([web_origin[0]-4, web_origin[1]-4, web_origin[0]+4, web_origin[1]+4], fill=(229, 9, 20, 255))
+            
+        # Paste the high-detail Spider-Man character
+        canvas.paste(rotated_spr, (paste_x, paste_y), rotated_spr)
+        
+        # Top anchor bracket
+        draw.ellipse([anchor[0]-6, anchor[1]-6, anchor[0]+6, anchor[1]+6], fill=(229, 9, 20, 255))
+        draw.ellipse([anchor[0]-2, anchor[1]-2, anchor[0]+2, anchor[1]+2], fill=(255, 255, 255, 255))
+        draw.line([anchor[0]-16, anchor[1], anchor[0]+16, anchor[1]], fill=(229, 9, 20, 255), width=2)
+        
+        # Comic corner brackets
+        draw.line([(5, 22), (5, 5), (22, 5)], fill=(229, 9, 20, 255), width=2)
+        draw.line([(W-5, H-22), (W-5, H-5), (W-22, H-5)], fill=(229, 9, 20, 255), width=2)
+        
+        # Telemetry footer text
+        draw.text((25, H-20), "LIVE CONTRIBUTION FEED // REAL-TIME GITHUB TELEMETRY", fill=(95, 95, 120, 255))
+        draw.text((W-185, H-20), "STATUS: SWINGING // LIVE", fill=(200, 45, 50, 255))
+        
+        frames.append(canvas.convert("RGB"))
+        if (i+1) % 6 == 0:
+            print(f"Generated frame {i+1}/{FRAMES}...")
+            
+    out_path = "assets/swinging-spider.gif"
+    frames[0].save(
+        out_path,
+        save_all=True,
+        append_images=frames[1:],
+        duration=DUR,
+        loop=0,
+        optimize=False
+    )
+    print(f"Saved pixel-art GIF {out_path} ({os.path.getsize(out_path)/1024:.1f} KB)")
 
-# Sprite center (reference point for rotation/positioning)
-SPR_CX = CW * SCALE // 2   # 77
-SPR_CY = CH * SCALE // 2   # 119
-
-# Pre-compute: hand offset FROM sprite center (in sprite pixels, before rotation)
-HAND_OFF_X = HAND_SX - SPR_CX   # negative → hand is to the left of center
-HAND_OFF_Y = HAND_SY - SPR_CY   # negative → hand is above center
-
-# Right-hand (free arm) offset for web-shooting
-RHAND_SX = 17 * SCALE + SCALE // 2
-RHAND_SY = 16 * SCALE + SCALE // 2
-RHAND_OFF_X = RHAND_SX - SPR_CX
-RHAND_OFF_Y = RHAND_SY - SPR_CY
-
-# ─────────────────────────────────────────────────────────────────────────────
-# FRAME RENDERING
-# ─────────────────────────────────────────────────────────────────────────────
-def rotated_offset(off_x, off_y, angle_deg):
-    """Rotate an (off_x, off_y) vector by angle_deg (CW positive)."""
-    rad   = math.radians(-angle_deg)   # PIL rotates CCW, swing is CW when +angle
-    cos_a = math.cos(rad)
-    sin_a = math.sin(rad)
-    return (off_x * cos_a - off_y * sin_a,
-            off_x * sin_a + off_y * cos_a)
-
-def draw_frame(f):
-    canvas = Image.new('RGB', (W, H), BG)
-    draw   = ImageDraw.Draw(canvas)
-    angle  = swing_angle(f)
-    rad    = math.radians(angle)
-
-    # ── Atmosphere web lines ──
-    draw.line([(0, 0),   (170, 62)],  fill=(36,36,50), width=1)
-    draw.line([(0, 0),   (245, 82)],  fill=(26,26,40), width=1)
-    draw.line([(850, 0), (680, 62)],  fill=(36,36,50), width=1)
-    draw.line([(850, 0), (605, 82)],  fill=(26,26,40), width=1)
-
-    # ── Hand world position: hangs at TLEN from anchor ──
-    # The hand is the PIVOT of the swing.
-    hand_wx = AX + TLEN * math.sin(rad)
-    hand_wy = AY + TLEN * math.cos(rad)
-
-    # ── Silk thread: anchor → hand ──
-    draw.line([(AX, AY), (int(hand_wx), int(hand_wy))], fill=SILK, width=2)
-
-    # ── Sprite center: hand pos MINUS the rotated hand offset ──
-    # rotated_offset gives the hand's position relative to sprite center after rotation
-    rox, roy = rotated_offset(HAND_OFF_X, HAND_OFF_Y, angle)
-    spr_cx   = hand_wx - rox
-    spr_cy   = hand_wy - roy
-
-    # ── Rotate sprite ──
-    # PIL.Image.rotate: positive angle = CCW. Swing right = CW = negative PIL angle.
-    rotated = SPRITE.rotate(-angle, resample=Image.BICUBIC, expand=True)
-
-    # Paste centered at (spr_cx, spr_cy)
-    px = int(spr_cx - rotated.width  // 2)
-    py = int(spr_cy - rotated.height // 2)
-    canvas.paste(rotated, (px, py), rotated)
-
-    # ── Anchor glow dot ──
-    draw.ellipse([AX-5, AY-5, AX+5, AY+5], fill=(229, 9, 20))
-    draw.ellipse([AX-2, AY-2, AX+2, AY+2], fill=(255, 90, 90))
-
-    # ── Web-shooting at apex ──
-    web_str = max(0.0, (abs(angle) - 27.0) / (AMP - 27.0))
-    if web_str > 0.05:
-        # Compute rotated right-hand position
-        rrox, rroy = rotated_offset(RHAND_OFF_X, RHAND_OFF_Y, angle)
-        rhx = spr_cx + rrox
-        rhy = spr_cy + rroy
-        direction = 1 if angle < 0 else -1
-        tx = AX + direction * 370
-        ty = AY - 8
-        wc  = tuple(int(c * min(1.0, web_str)) for c in WEB_C)
-        wc2 = tuple(int(c * web_str * 0.4) for c in WEB_C)
-        draw.line([(rhx, rhy), (tx, ty)], fill=wc, width=2)
-        draw.line([(rhx - 1, rhy), (tx, ty - 1)], fill=wc2, width=1)
-
-    # ── Re-draw silk thread on top of sprite (so it's crisp above bg) ──
-    draw.line([(AX, AY), (int(hand_wx), int(hand_wy))], fill=SILK, width=2)
-
-    # ── Label ──
-    label = "LIVE CONTRIBUTION FEED  //  github.com/animeshy071-web"
-    draw.text((W // 2 - len(label) * 3, H - 18), label, fill=LABEL)
-
-    return canvas
-
-# ─────────────────────────────────────────────────────────────────────────────
-# GENERATE & SAVE
-# ─────────────────────────────────────────────────────────────────────────────
-print(f"Generating {FRAMES} frames (sprite: {CW*SCALE}x{CH*SCALE}px, block={SCALE}px)...")
-frames = []
-for i in range(FRAMES):
-    frames.append(draw_frame(i))
-    if (i + 1) % 8 == 0:
-        print(f"  {i+1}/{FRAMES} frames done")
-
-out = 'assets/swinging-spider.gif'
-frames[0].save(
-    out,
-    save_all=True,
-    append_images=frames[1:],
-    duration=DUR,
-    loop=0,
-    optimize=False,
-)
-kb = os.path.getsize(out) / 1024
-print(f"Done: {out} | {FRAMES}f x {DUR}ms = {FRAMES*DUR/1000:.2f}s | {kb:.0f}KB")
+if __name__ == "__main__":
+    render_scene()
