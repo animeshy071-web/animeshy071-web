@@ -117,23 +117,6 @@
 
 <br />
 
-<table align="center" width="850" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; max-width: 100%;">
-  <tr>
-    <td align="center" width="50%" style="padding: 6px; border: none;">
-      <a href="https://github.com/animeshy071-web">
-        <img src="https://github-readme-stats.vercel.app/api?username=animeshy071-web&amp;show_icons=true&amp;theme=dark&amp;bg_color=08080c&amp;title_color=FF3030&amp;text_color=A0A0B0&amp;icon_color=E50914&amp;border_color=22222e&amp;hide_border=false" alt="Animesh GitHub Stats" width="100%" />
-      </a>
-    </td>
-    <td align="center" width="50%" style="padding: 6px; border: none;">
-      <a href="https://github.com/animeshy071-web">
-        <img src="https://github-readme-streak-stats.herokuapp.com/?user=animeshy071-web&amp;theme=dark&amp;background=08080c&amp;fire=E50914&amp;ring=FF3030&amp;currStreakLabel=FF3030&amp;currStreakNum=F2F2F2&amp;sideNums=E0E0EA&amp;sideLabels=888899&amp;dates=666677&amp;border=22222e" alt="Animesh GitHub Streak" width="100%" />
-      </a>
-    </td>
-  </tr>
-</table>
-
-<br />
-
 <!-- =================================================== -->
 <!-- FOOTER : DANGLING SILK STRAND                       -->
 <!-- =================================================== -->
