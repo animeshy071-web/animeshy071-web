@@ -64,8 +64,8 @@
       </a>
     </td>
     <td align="center" width="50%" style="padding: 6px; border: none;">
-      <a href="https://github.com/sakshamwadhankar/PS-4-_gdgNagpur_DeadPixel">
-        <img src="./assets/card-civic.svg" alt="Civic Engagement Hub" width="100%" />
+      <a href="https://github.com/animeshy071-web/swiPT">
+        <img src="./assets/card-swipegpt.svg" alt="SwipeGPT - Tinder Cards for ChatGPT" width="100%" />
       </a>
     </td>
   </tr>
